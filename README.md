@@ -10,6 +10,15 @@ By 3:00 PM you walk out with:
 3. An explicit boundary for where AI does NOT belong in your teaching
 4. A dated Monday morning commitment to one specific action
 
+## Two notebooks in this repo
+
+| Notebook | Audience | Purpose |
+|---|---|---|
+| **`curriculum-embedding-lab.ipynb`** | Faculty | Decide where AI fits in *your course* — the seminar's afternoon lab (below) |
+| **`study-mastery-lab.ipynb`** | Students | A grounded study tool you can hand to students — quiz themselves, get Socratic hints, and check their understanding against their own course material. See [For students](#for-students-the-study--mastery-partner-lab). |
+
+Both run in the same SageMaker Studio + Bedrock environment and share the same `mlu_utils/` helpers. Everything below describes the faculty lab unless noted.
+
 ## Quick start (in SageMaker Studio)
 
 1. **Open SageMaker Studio** in JupyterLab mode (URL provided by your seminar instructor)
@@ -56,14 +65,16 @@ Your seminar instructor handled all of this. If you have trouble, ask them — d
 mlu-faculty-ai-curriculum-lab/
 ├── README.md                          ← you are here
 ├── requirements.txt                   ← Python packages (pre-pinned)
-├── curriculum-embedding-lab.ipynb     ← the lab notebook
+├── curriculum-embedding-lab.ipynb     ← faculty lab notebook
+├── study-mastery-lab.ipynb            ← student lab notebook (study tool)
 ├── data/                              ← 6 sample PDFs (one per persona)
 │   ├── README.md
 │   ├── persona1_dentistry_perio_case.pdf
 │   ├── persona2_cs_data_structures.pdf
 │   └── ... (4 more)
 ├── mlu_utils/
-│   └── embeddings.py                  ← Bedrock embeddings helper
+│   ├── embeddings.py                  ← Bedrock embeddings helper
+│   └── study_tools.py                 ← study-mode prompts (student lab)
 └── instructor/                        ← run-of-show docs (not for participants)
 ```
 
@@ -73,6 +84,20 @@ mlu-faculty-ai-curriculum-lab/
 - **Not a coding tutorial.** You'll see ~5 cells of Python; you don't need to understand them. The writing cells matter more.
 - **Not a sales pitch for AI.** Part 4 explicitly asks you to articulate where AI does NOT belong in your teaching. That's intentional.
 
+## For students: the Study &amp; Mastery Partner lab
+
+`study-mastery-lab.ipynb` is a **student-facing** companion. It's a grounded study tool — students point it at their own course material (a reading, lecture notes, a textbook chapter) and use three modes:
+
+- **Quiz Me** — a practice quiz generated from the material, with a hidden answer key to self-test against.
+- **Socratic Hint** — paste a problem you're stuck on; it gives the *next question to ask yourself*, never the answer.
+- **Explain-Back** — write a concept in your own words and have it checked against the source, so you see your gaps.
+
+It ships with a sample chapter so it runs immediately; students swap in their own PDF by dropping a file into `data/` and changing one line (`SOURCE_PDF`). It ends with an academic-integrity reflection — **use AI to study, not to do the thinking you're graded on** — and a take-home study plan.
+
+**What this lab is NOT:** not a way to get answers to graded work (Socratic and Explain-Back modes deliberately withhold answers), and not a coding tutorial.
+
+Same requirements as the faculty lab (Bedrock access for `amazon.nova-lite-v1:0` + `amazon.nova-2-multimodal-embeddings-v1:0`, SageMaker Studio, `us-east-1`). This lab is **self-paced** and can be run on its own, after or independent of the seminar.
+
 ## Troubleshooting
 
 | Issue | Fix |
@@ -81,6 +106,9 @@ mlu-faculty-ai-curriculum-lab/
 | Embedding cell hangs > 90 sec | Source PDF is too large — ask your instructor to swap to a smaller persona sample |
 | `No such file or directory` for PDF | Wrong persona number set in Part 0, or sample PDF not yet staged — ask your instructor |
 | Kernel disconnected | Restart kernel and re-run from Part 1 |
+| _(student lab)_ `No such file or directory` for your PDF | Your file isn't in `data/`, or `SOURCE_PDF` doesn't match its name — check the file browser on the left |
+| _(student lab)_ Loads 0 pages / garbled text | Your PDF is a scan/image, not text — `PyPDFLoader` can't read it. Use a text-based PDF |
+| _(student lab)_ Socratic Hint gave away the answer | A known limitation of smaller models — re-run the cell; don't trust a leaked answer blindly |
 
 ## After the seminar
 

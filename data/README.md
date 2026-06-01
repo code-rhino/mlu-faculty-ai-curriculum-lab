@@ -19,6 +19,10 @@ Per the locked Lab 2 design decisions (see `../SEMINAR_PLAN.md`), we do **not** 
 
 All six samples are staged as `.pdf`. Personas 1–3 use sourced open/public-domain documents; personas 4–6 use original license-clean material authored for the seminar. (Earlier `.md` placeholders held sourcing specs and have been removed now that the PDFs are in place.)
 
+## Student lab default + bring-your-own
+
+The student lab (`../study-mastery-lab.ipynb`) defaults its `SOURCE_PDF` to `persona2_cs_data_structures.pdf` (the tested CC-BY chapter) so it runs out of the box. Students can swap in their own material by dropping a text-based PDF into this `data/` folder and changing the `SOURCE_PDF` line in Part 2 — the same universal requirements above apply (text-based, under ~50 pages).
+
 ## Universal requirements (apply to all six)
 
 - **License:** Public domain, CC-BY, CC-BY-SA, or explicit open-access. **No** copyrighted textbooks, Harvard Business cases, paywalled journal articles, etc.
