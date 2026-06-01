@@ -4,7 +4,7 @@
 # and Amazon Bedrock as of seminar prep date. PIN BEFORE FINAL — version drift in the
 # langchain ecosystem is the #1 source of "it worked yesterday" breakage.
 #
-# Verify by running discipline-assistant.ipynb end-to-end after install.
+# Verify by running curriculum-embedding-lab.ipynb end-to-end after install.
 
 boto3>=1.35.0,<2.0
 langchain>=0.3.0,<0.4
