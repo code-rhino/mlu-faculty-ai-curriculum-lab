@@ -1,0 +1,15 @@
+# Faculty AI Seminar — Lab 2 dependencies
+#
+# Versions chosen for compatibility with SageMaker Studio Python 3 (Data Science) kernel
+# and Amazon Bedrock as of seminar prep date. PIN BEFORE FINAL — version drift in the
+# langchain ecosystem is the #1 source of "it worked yesterday" breakage.
+#
+# Verify by running discipline-assistant.ipynb end-to-end after install.
+
+boto3>=1.35.0,<2.0
+langchain>=0.3.0,<0.4
+langchain-aws>=0.2.0,<0.3
+langchain-community>=0.3.0,<0.4
+langchain-core>=0.3.0,<0.4
+faiss-cpu>=1.9.0,<2.0
+pypdf>=5.0.0,<6.0
